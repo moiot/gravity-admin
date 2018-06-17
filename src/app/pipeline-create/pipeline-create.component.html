@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <span>Create Pipeline</span>
+  <mat-icon class="example-icon" routerLink="/pipelines">home</mat-icon>
+</mat-toolbar>
+
+<div *ngIf="pipeline">
+  <form (ngSubmit)="save()" #specForm="ngForm">
+    <button mat-raised-button color="primary">Submit</button>
+    <app-json-editor [options]="editorOptions" [(data)]="pipeline"></app-json-editor>
+  </form>
+</div>

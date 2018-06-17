@@ -1,0 +1,33 @@
+<mat-toolbar>
+  <span>1-mysql2mysql.modou</span>
+  <mat-icon class="example-icon" routerLink="/pipelines">home</mat-icon>
+</mat-toolbar>
+
+<div *ngIf="pipeline">
+  <mat-grid-list cols="2" rowHeight="fit" style="height: 800px">
+    <mat-grid-tile>
+      <mat-card class="tile-content">
+        <mat-card-title>Spec</mat-card-title>
+        <mat-card-content>
+          <form (ngSubmit)="onSubmit()" #specForm="ngForm">
+            <button mat-raised-button color="primary">Submit</button>
+            <app-json-editor [options]="editorOptions" [(data)]="pipeline.spec"></app-json-editor>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-card class="tile-content">
+        <mat-card-title>Status</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button color="primary" (click)="getPipeline()">Refresh</button>
+          <app-json-editor [options]="viewOptions" [data]="pipeline.status"></app-json-editor>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

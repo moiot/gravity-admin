@@ -1,0 +1,47 @@
+<mat-toolbar>
+  <button mat-button color="primary" routerLink="/pipelines/create">Create</button>
+</mat-toolbar>
+
+<div class="mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by Id or Name">
+  </mat-form-field>
+
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paused">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Paused</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.spec.paused}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button routerLink="/pipelines/{{row.id}}" color="primary">Detail</button>
+        <button mat-button (click)="resumePipe(row.id)">Resume</button>
+        <button mat-button (click)="pausePipe(row.id)">Pause</button>
+        <button mat-button color="warn" disabled>Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [length]="dataSource.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="50"
+                 [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

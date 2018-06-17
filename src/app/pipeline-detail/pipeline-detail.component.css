@@ -1,0 +1,13 @@
+@import "~jsoneditor/dist/jsoneditor.min.css";
+
+.full-width {
+  width: 100%;
+  margin: 5px;
+}
+
+.tile-content {
+  width: 100%;
+  margin: 5px;
+  height: 100%;
+  align-self: flex-start
+}
