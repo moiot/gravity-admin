@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
 import {PipelineService} from '../pipeline.service';
+import {LogService} from '../log.service';
 
 @Component({
   selector: 'app-pipeline-detail',
@@ -19,7 +20,8 @@ export class PipelineDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private location: Location,
-              private pipelineService: PipelineService) {
+              private pipelineService: PipelineService,
+              private logger: LogService) {
     this.editorOptions = new JsonEditorOptions();
     this.viewOptions = new JsonEditorOptions();
   }
@@ -39,7 +41,10 @@ export class PipelineDetailComponent implements OnInit {
   getPipeline() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.pipelineService.get(id)
-      .subscribe(p => this.pipeline = p);
+      .subscribe(p => {
+        this.pipeline = p;
+        this.logger.info(`loaded pipeline ${p.name}`);
+      });
   }
 
   back() {

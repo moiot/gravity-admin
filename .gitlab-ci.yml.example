@@ -17,7 +17,7 @@ build_prod:
   before_script:
     - npm install
   script:
-    - npm run build --prod
+    - npm run build -- --prod
   only:
     - master
 
