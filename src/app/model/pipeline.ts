@@ -149,11 +149,13 @@ export class PipelineVO {
   'name': string;
   'spec': PipelineSpecVO;
   'status': PipelineStatusVO;
+  'version': number;
 
   static createFrom(source: any) {
     const result = new PipelineVO();
     result['id'] = source['id'];
     result['name'] = source['name'];
+    result['version'] = source['version'];
     result['spec'] = source['spec'] ? PipelineSpecVO.createFrom(source['spec']) : null;
     result['status'] = source['status'] ? PipelineStatusVO.createFrom(source['status']) : null;
     return result;
