@@ -173,6 +173,22 @@ export class OffsetStoreConfig {
     // [end]
 }
 
+export class TableConfig {
+    schema: string;
+    table: string;
+    'rename-columns': Object;
+    'ignore-columns': string[];
+
+    static createFrom(source: any) {
+        const result = new TableConfig();
+        result['schema'] = source['schema'];
+        result['table'] = source['table'];
+        result['rename-columns'] = source['rename-columns'];
+        result['ignore-columns'] = source['ignore-columns'];
+        return result;
+    }
+}
+
 export class PipelineConfig {
     'name': string;
     'unique-source-name': string;
@@ -198,6 +214,7 @@ export class PipelineConfig {
     'job-callback': string;
     'before-job-execution': string[];
     'after-job-execution': string[];
+    'table-config': TableConfig[];
 
     static createFrom(source: any) {
         const result = new PipelineConfig();
@@ -210,7 +227,7 @@ export class PipelineConfig {
         result['target-mysql'] = source['target-mysql'] ? DBConfig.createFrom(source['target-mysql']) : null;
         result['sql-execution-engine'] = source['sql-execution-engine'];
         result['target-mongo'] = source['target-mongo'];
-        result['routes'] = source['routes'] ? source['routes'].map(function(element) { return Route.createFrom(element); }) : null;
+        result['routes'] = source['routes'] ? source['routes'].map(function (element) { return Route.createFrom(element); }) : null;
         result['executor-count-per-table'] = source['executor-count-per-table'];
         result['batch-size-per-table'] = source['batch-size-per-table'];
         result['max-retry-count'] = source['max-retry-count'];
@@ -225,6 +242,8 @@ export class PipelineConfig {
         result['job-callback'] = source['job-callback'];
         result['before-job-execution'] = source['before-job-execution'];
         result['after-job-execution'] = source['after-job-execution'];
+        result['table-config'] = source['table-config'] ? source['table-config'].
+            map(function (element) { return TableConfig.createFrom(element); }) : null;
         return result;
     }
 
