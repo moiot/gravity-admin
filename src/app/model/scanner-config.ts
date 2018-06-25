@@ -35,7 +35,7 @@ export class StaticRouteConfig {
 
     static createFrom(source: any) {
         const result = new StaticRouteConfig();
-        result['routes'] = source['routes'] ? source['routes'].map(function(element) { return StaticRouteRule.createFrom(element); }) : null;
+        result['routes'] = source['routes'] ? source['routes'].map(function (element) { return StaticRouteRule.createFrom(element); }) : null;
         return result;
     }
 
@@ -246,6 +246,7 @@ export class PipelineConfig {
     'table-config': TableConfig[];
     'output-format': string;
     'table-scan-batch': number;
+    'batch-per-second-limit': number;
     'kafka-global': KafkaGlobalConfig;
     'static-route-config': StaticRouteConfig;
 
@@ -253,9 +254,10 @@ export class PipelineConfig {
         const result = new PipelineConfig();
         result['name'] = source['name'];
         result['source'] = source['source'] ? DBConfig.createFrom(source['source']) : null;
-        result['table-config'] = source['table-config'] ? source['table-config'].map(function(element) { return TableConfig.createFrom(element); }) : null;
+        result['table-config'] = source['table-config'] ? source['table-config'].map(function (element) { return TableConfig.createFrom(element); }) : null;
         result['output-format'] = source['output-format'];
         result['table-scan-batch'] = source['table-scan-batch'];
+        result['batch-per-second-limit'] = source['batch-per-second-limit'];
         result['kafka-global'] = source['kafka-global'] ? KafkaGlobalConfig.createFrom(source['kafka-global']) : null;
         result['static-route-config'] = source['static-route-config'] ? StaticRouteConfig.createFrom(source['static-route-config']) : null;
         return result;

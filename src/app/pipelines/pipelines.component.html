@@ -30,6 +30,7 @@
         <button mat-button routerLink="/pipelines/{{row.id}}" color="primary">Detail</button>
         <button mat-button (click)="resumePipe(row.id)">Resume</button>
         <button mat-button (click)="pausePipe(row.id)">Pause</button>
+        <button mat-button (click)="resetFull(row.id)">ResetFull</button>
         <button mat-button color="warn" disabled>Delete</button>
       </mat-cell>
     </ng-container>

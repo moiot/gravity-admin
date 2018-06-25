@@ -47,4 +47,14 @@ export class PipelineService {
       })
     );
   }
+
+  resetFull(id: number): Observable<any> {
+    return this.http.post(`${url}/${id}/resetfull`, httpOptions).pipe(
+      tap(resp => this.logger.info(resp['msg'])),
+      catchError(resp => {
+        this.logger.error(`update pipeline failed.`, JSON.stringify(resp['error']));
+        return throwError(resp['error']);
+      })
+    );
+  }
 }

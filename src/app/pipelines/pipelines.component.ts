@@ -52,4 +52,14 @@ export class PipelinesComponent implements OnInit {
       }
     });
   }
+
+  resetFull(id: number) {
+    this.pipelineService.get(id).subscribe(pipeline => {
+      if (pipeline.spec.paused) {
+        this.pipelineService.resetFull(id).subscribe(() => window.location.reload());
+      } else {
+        this.logger.info('pipeline is working, can\'t reset full');
+      }
+    });
+  }
 }

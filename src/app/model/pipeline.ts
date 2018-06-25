@@ -1,6 +1,6 @@
-import {PipelineConfig as GravityConfig} from './gravity-config';
-import {PipelineConfig as NuclearConfig} from './nuclear-config';
-import {PipelineConfig as ScannerConfig} from './scanner-config';
+import { PipelineConfig as GravityConfig } from './gravity-config';
+import { PipelineConfig as NuclearConfig } from './nuclear-config';
+import { PipelineConfig as ScannerConfig } from './scanner-config';
 
 /* Do not change, this code is generated from Golang structs */
 
@@ -80,17 +80,23 @@ export class TaskVO {
     result['name'] = source['name'];
     switch (result.component) {
       case 'gravity': {
-        result.config = GravityConfig.createFrom(source.config);
+        if (source.config !== null) {
+          result.config = GravityConfig.createFrom(source.config);
+        }
         break;
       }
 
       case 'nuclear': {
-        result.config = NuclearConfig.createFrom(source.config);
+        if (source.config !== null) {
+          result.config = NuclearConfig.createFrom(source.config);
+        }
         break;
       }
 
       case 'scanner': {
-        result.config = ScannerConfig.createFrom(source.config);
+        if (source.config !== null) {
+          result.config = ScannerConfig.createFrom(source.config);
+        }
         break;
       }
     }
