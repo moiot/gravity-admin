@@ -1,0 +1,40 @@
+before_script:
+  - docker pull quay.io/coreos/etcd
+  - docker tag quay.io/coreos/etcd docker.mobike.io/common/etcd
+  - docker push docker.mobike.io/common/etcd
+
+# install_dependency:
+#   stage: prepare
+#   script:
+#     - npm install
+#   cache:
+#       key: "$CI_COMMIT_REF_NAME"
+#       paths:
+#       - node_modules/
+
+# build_prod:
+#   stage: build
+#   artifacts:
+#     name: "$CI_COMMIT_REF_NAME-$git_hash"
+#     paths:
+#       - dist
+#     expire_in: 8 hrs
+#   before_script:
+#     - npm install
+#   script:
+#     - npm run build -- --prod
+#   only:
+#     - master
+
+# build_prod:
+#   stage: build
+#   before_script:
+#     - npm install
+#   script:
+#     - npm run build
+#   only:
+#     - develop
+
+# stages:
+#   - prepare
+#   - build
