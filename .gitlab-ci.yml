@@ -1,9 +1,9 @@
 run:
   stage: prepare
   script:
-    - docker pull golang:1.10.1-stretch
-    - docker tag golang:1.10.1-stretch docker.mobike.io/common/golang:1.10.1-stretch
-    - docker push docker.mobike.io/common/golang:1.10.1-stretch
+    - docker pull golang:1.10.1
+    - docker tag golang:1.10.1 docker.mobike.io/common/golang:1.10.1
+    - docker push docker.mobike.io/common/golang:1.10.1
 
 # install_dependency:
 #   stage: prepare
