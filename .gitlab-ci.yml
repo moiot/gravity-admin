@@ -1,10 +1,3 @@
-run:
-  stage: prepare
-  script:
-    - docker pull mongo
-    - docker tag mongo docker.mobike.io/common/mongo
-    - docker push docker.mobike.io/common/mongo
-
 # install_dependency:
 #   stage: prepare
 #   script:
@@ -37,6 +30,6 @@ run:
 #   only:
 #     - develop
 
-stages:
-  - prepare
+# stages:
+  # - prepare
   # - build

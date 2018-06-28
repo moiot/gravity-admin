@@ -6,7 +6,7 @@ import { PipelineConfig as ScannerConfig } from './scanner-config';
 
 export class TaskStatusVO {
   'position': string;
-  'processId': number;
+  'processId': string;
   'state': string;
   'lastUpdate': string;
   'task': TaskVO;
@@ -15,7 +15,7 @@ export class TaskStatusVO {
     const result = new TaskStatusVO();
     result['task'] = source['task'] ? TaskVO.createFrom(source['task']) : null;
     result['position'] = source['position'];
-    result['processId'] = source['processId'];
+    result['processId'] = source['processId'].toString();
     result['state'] = source['state'];
     result['lastUpdate'] = source['lastUpdate'];
     return result;

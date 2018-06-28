@@ -4,10 +4,10 @@ import {Observable, of, throwError} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LogService} from './log.service';
+import * as JSONbig from 'json-bigint';
+
 
 const url = 'api/pipeline';
-const listMapper = map<object[], PipelineVO[]>(resp => resp.map(p => PipelineVO.createFrom(p)));
-const mapper = map<object, PipelineVO>(resp => PipelineVO.createFrom(resp));
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -21,11 +21,15 @@ export class PipelineService {
   }
 
   list(): Observable<PipelineVO[]> {
-    return listMapper(this.http.get<object[]>(url));
+    return this.http.get(url, {responseType: 'text'}).pipe(
+      map(resp => JSONbig.parse(resp).map(p => PipelineVO.createFrom(p)))
+    );
   }
 
   get(id: number): Observable<PipelineVO> {
-    return mapper(this.http.get(`${url}/${id}`));
+    return this.http.get(`${url}/${id}`, {responseType: 'text'}).pipe(
+      map(resp => PipelineVO.createFrom(JSONbig.parse(resp)))
+    );
   }
 
   create(p: CreatePipelineRequest): Observable<any> {
