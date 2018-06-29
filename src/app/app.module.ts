@@ -21,11 +21,17 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
+
+
 
 import {AppRoutingModule} from './app-routing.module';
 import {PipelineDetailComponent} from './pipeline-detail/pipeline-detail.component';
 import {JsonEditorComponent} from './json-editor/json-editor.component';
 import {PipelineCreateComponent} from './pipeline-create/pipeline-create.component';
+import { ProcessListComponent } from './process-list/process-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,8 @@ import {PipelineCreateComponent} from './pipeline-create/pipeline-create.compone
     PipelinesComponent,
     PipelineDetailComponent,
     JsonEditorComponent,
-    PipelineCreateComponent
+    PipelineCreateComponent,
+    ProcessListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +60,9 @@ import {PipelineCreateComponent} from './pipeline-create/pipeline-create.compone
     MatSnackBarModule,
     MatIconModule,
     FormsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule,
 
     HttpClientModule,
     AppRoutingModule,

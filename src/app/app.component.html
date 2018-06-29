@@ -1,7 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}
-  </h1>
+  <mat-toolbar>Welcome to {{ title }}</mat-toolbar>
 </div>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened disableClose>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/pipelines">Pipelines</a>
+      <a mat-list-item routerLink="/processes">Processes</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

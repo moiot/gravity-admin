@@ -1,0 +1,58 @@
+<div class="mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by pipe id or name">
+  </mat-form-field>
+
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="component">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Component</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.component}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.state}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pipeId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pipe Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.pipeId}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pipeName">
+      <mat-header-cell *matHeaderCellDef>Pipe Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.pipeName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="labels">
+      <mat-header-cell *matHeaderCellDef>Labels</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.labels | json}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="disclaimer">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Summary:
+        gravity: {{gravityWorking}}/{{gravityTotal}}
+        nuclear: {{nuclearWorking}}/{{nuclearTotal}}
+        scanner: {{scannerWorking}}/{{scannerTotal}}
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['disclaimer'];"></mat-footer-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [length]="dataSource.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 25, 50]">
+  </mat-paginator>
+</div>

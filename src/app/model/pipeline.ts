@@ -1,6 +1,6 @@
-import { PipelineConfig as GravityConfig } from './gravity-config';
-import { PipelineConfig as NuclearConfig } from './nuclear-config';
-import { PipelineConfig as ScannerConfig } from './scanner-config';
+import {PipelineConfig as GravityConfig} from './gravity-config';
+import {PipelineConfig as NuclearConfig} from './nuclear-config';
+import {PipelineConfig as ScannerConfig} from './scanner-config';
 
 /* Do not change, this code is generated from Golang structs */
 
@@ -177,3 +177,7 @@ export class CreatePipelineRequest {
   'name': string;
   'spec': PipelineSpecVO;
 }
+
+export const Gravity = 'gravity';
+export const Nuclear = 'nuclear';
+export const Scanner = 'scanner';

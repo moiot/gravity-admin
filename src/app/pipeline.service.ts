@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CreatePipelineRequest, PipelineVO} from './model/pipeline';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LogService} from './log.service';

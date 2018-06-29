@@ -1,11 +1,10 @@
-<mat-toolbar>
-  <button mat-button color="primary" routerLink="/pipelines/create">Create</button>
-</mat-toolbar>
-
 <div class="mat-elevation-z8">
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by Id or Name">
   </mat-form-field>
+
+  <button mat-fab style="float: right;vertical-align: center" color="primary" routerLink="/pipelines/create">Create
+  </button>
 
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
@@ -27,11 +26,10 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-button routerLink="/pipelines/{{row.id}}" color="primary">Detail</button>
-        <button mat-button (click)="resumePipe(row.id)">Resume</button>
-        <button mat-button (click)="pausePipe(row.id)">Pause</button>
-        <button mat-button (click)="resetFull(row.id)">ResetFull</button>
-        <button mat-button color="warn" disabled>Delete</button>
+        <button mat-flat-button routerLink="/pipelines/{{row.id}}" color="primary">Detail</button>
+        <button mat-button (click)="resumePipe(row.id)" [disabled]="!row.spec.paused">Resume</button>
+        <button mat-button (click)="pausePipe(row.id)" [disabled]="row.spec.paused">Pause</button>
+        <button mat-button color="warn" (click)="resetFull(row.id)" [disabled]="!row.spec.paused">ResetFull</button>
       </mat-cell>
     </ng-container>
 
@@ -42,7 +40,7 @@
   <mat-paginator #paginator
                  [length]="dataSource.data.length"
                  [pageIndex]="0"
-                 [pageSize]="50"
-                 [pageSizeOptions]="[25, 50, 100, 250]">
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 25, 50]">
   </mat-paginator>
 </div>
