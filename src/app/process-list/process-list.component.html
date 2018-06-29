@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by pipe id or name">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by id or name">
   </mat-form-field>
 
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">

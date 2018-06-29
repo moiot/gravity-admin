@@ -102,6 +102,10 @@ export class ProcessListDataSource extends DataSource<ProcessVO> {
         return true;
       }
 
+      if (d.id === this.filter) {
+        return true;
+      }
+
       return d.pipeName.toLowerCase().indexOf(this.filter) !== -1;
     });
 

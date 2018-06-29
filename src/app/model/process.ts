@@ -11,7 +11,7 @@ export class ProcessVO {
 
   static createFrom(source: any) {
     const result = new ProcessVO();
-    result.id = source['id'];
+    result.id = source['id'].toString();
     result.component = source['component'];
     result.labels = source['labels'];
     result.state = source['state'];
