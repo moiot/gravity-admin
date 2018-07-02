@@ -43,6 +43,7 @@ export class PipelineService {
   }
 
   update(p: PipelineVO): Observable<any> {
+    p.status = null;
     return this.http.put(`${url}/${p.id}`, p, httpOptions).pipe(
       tap(resp => this.logger.info(resp['msg'])),
       catchError(resp => {
