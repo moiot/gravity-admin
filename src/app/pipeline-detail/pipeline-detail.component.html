@@ -1,4 +1,7 @@
 <div *ngIf="pipeline">
+  <mat-toolbar>
+    <span>{{pipeline.id}}-{{pipeline.name}}@{{pipeline.version}}</span>
+  </mat-toolbar>
   <mat-grid-list cols="2" rowHeight="fit" style="height: 800px">
     <mat-grid-tile>
       <mat-card class="tile-content">
