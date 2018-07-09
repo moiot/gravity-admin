@@ -68,7 +68,8 @@ export class LabelSelector {
 export class TaskVO {
   'component': string;
   'name': string;
-  'config': GravityConfig | NuclearConfig | ScannerConfig;
+  // 'config': GravityConfig | NuclearConfig | ScannerConfig;
+  'config': object;
 
   get key(): string {
     return this.name + '-' + this.component;
@@ -78,28 +79,29 @@ export class TaskVO {
     const result = new TaskVO();
     result['component'] = source['component'];
     result['name'] = source['name'];
-    switch (result.component) {
-      case 'gravity': {
-        if (source.config !== null) {
-          result.config = GravityConfig.createFrom(source.config);
-        }
-        break;
-      }
-
-      case 'nuclear': {
-        if (source.config !== null) {
-          result.config = NuclearConfig.createFrom(source.config);
-        }
-        break;
-      }
-
-      case 'scanner': {
-        if (source.config !== null) {
-          result.config = ScannerConfig.createFrom(source.config);
-        }
-        break;
-      }
-    }
+    result['config'] = source['config'];
+    // switch (result.component) {
+    //   case 'gravity': {
+    //     if (source.config !== null) {
+    //       result.config = GravityConfig.createFrom(source.config);
+    //     }
+    //     break;
+    //   }
+    //
+    //   case 'nuclear': {
+    //     if (source.config !== null) {
+    //       result.config = NuclearConfig.createFrom(source.config);
+    //     }
+    //     break;
+    //   }
+    //
+    //   case 'scanner': {
+    //     if (source.config !== null) {
+    //       result.config = ScannerConfig.createFrom(source.config);
+    //     }
+    //     break;
+    //   }
+    // }
     return result;
   }
 
