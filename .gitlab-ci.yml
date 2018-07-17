@@ -10,13 +10,13 @@
 build:
   stage: build
   before_script:
-    - npm install
+    - npm --registry https://registry.npm.taobao.org install
   script:
     - npm run build -- --prod
-    - docker build -t docker.mobike.io/$CI_PROJECT_PATH-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8} .
-    - docker push docker.mobike.io/$CI_PROJECT_PATH-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}
+    - docker build -t docker.mobike.io/$CI_PROJECT_PATH:${CI_COMMIT_SHA:0:8} .
+    - docker push docker.mobike.io/$CI_PROJECT_PATH:${CI_COMMIT_SHA:0:8}
   after_script:
-    - docker rmi docker.mobike.io/$CI_PROJECT_PATH-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}
+    - docker rmi docker.mobike.io/$CI_PROJECT_PATH:${CI_COMMIT_SHA:0:8}
   only:
     - master
 
