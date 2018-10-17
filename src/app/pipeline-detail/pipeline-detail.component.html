@@ -1,6 +1,6 @@
 <div *ngIf="pipeline">
   <mat-toolbar>
-    <span>{{pipeline.id}}-{{pipeline.name}}@{{pipeline.version}}</span>
+    <span>{{pipeline.id}}-<a href="http://grafana.mobike.io/d/66666/drc-pipeline-detail?var-pipeline_prefix={{pipeline.name}}&refresh=5s&orgId=2">{{pipeline.name}}</a>@{{pipeline.version}}</span>
   </mat-toolbar>
   <mat-grid-list cols="2" rowHeight="fit" style="height: 800px">
     <mat-grid-tile>

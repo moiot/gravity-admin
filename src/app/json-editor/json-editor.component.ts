@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Input, Output, ElementRef, EventEmitter} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as editor from 'jsoneditor';
 
 @Component({
@@ -99,17 +99,15 @@ export class JsonEditorComponent implements OnInit {
 
 export type JsonEditorMode = 'tree' | 'view' | 'form' | 'code' | 'text';
 
-const gravityTemplate = {
-  'disabled': false,
-  'selectors': null,
+const gravityDataTemplate = {
   'task': {
     'component': 'gravity',
-    'name': 'TODO',
+    'name': 'default',
     'config': {
-      'detect-txn': true,
+      'detect-txn': false,
       'input': 'mysql',
       'output': 'kafka',
-      'output-format': 'pb',
+      'output-format': 'json',
       'mysql': {
         'source': {
           'host': 'TODO',
@@ -117,11 +115,41 @@ const gravityTemplate = {
           'password': 'TODO',
           'location': 'Asia/Shanghai',
           'port': 3306,
+        }
+      },
+      'kafka-global': {
+        'broker-addrs': [
+          'kafka1.hdp.mobike.cn:9093',
+          'kafka2.hdp.mobike.cn:9093',
+          'kafka6.hdp.mobike.cn:9093'
+        ],
+        'cert-file': '',
+        'key-file': '',
+        'ca-file': '',
+        'verify-ssl': false,
+        'mode': 'async',
+        'sent-log': {
+          'level': '',
+          'format': 'json',
+          'disable-timestamp': false,
+          'file': {
+            'filename': 'config/msg_sent.log',
+            'log-rotate': false,
+            'max-size': 30,
+            'max-days': 15,
+            'max-backups': 0,
+            'compress': true
+          },
+          'SlowQueryFile': ''
         },
-        'start-position': {
-          'binlog-gtid': '',
-          'binlog-name': '',
-          'binlog-pos': 0
+        'producer': null,
+        'net': {
+          'sasl': {
+            'enable': true,
+            'user': 'db_drc',
+            'password': 'aLTfSK$4l3'
+          },
+          'KeepAlive': 0
         }
       },
       'route-mode': 'static',
@@ -130,118 +158,103 @@ const gravityTemplate = {
           {
             'source-db': 'TODO',
             'source-table': 'TODO',
-            'dml-target-topic': 'TODO',
+            'dml-target-topic': 'binlog.TODO.TODO'
           }
         ]
+      }
+    }
+  }
+};
+
+const gravitySandboxTemplate = {
+  'task': {
+    'component': 'gravity',
+    'name': 'default',
+    'config': {
+      'detect-txn': false,
+      'input': 'mysql',
+      'output-format': 'pb',
+      'mysql': {
+        'source': {
+          'host': 'TODO',
+          'username': 'TODO',
+          'password': 'TODO',
+          'port': 3306,
+          'location': 'Asia/Shanghai',
+        }
       },
-      'kafka-global': {
-        'broker-addrs': [
-          'TODO:9092'
-        ],
-        'mode': 'async',
-        'sent-log': {
-          'format': 'json',
-          'file': {
-            'filename': 'config/msg_sent.log',
-            'max-size': 30,
-            'max-days': 15,
-            'compress': true
-          }
-        },
+      'db-routes': [
+        {
+          'source-schema-name': 'TODO',
+          'source-table-name': '*',
+        }
+      ],
+      'target-mysql': {
+        'host': 'TODO',
+        'username': 'TODO',
+        'password': 'TODO',
+        'port': 3306,
+        'location': 'Asia/Shanghai',
+      },
+      'target-mysql-worker': {
+        'enable-ddl': true,
       },
     }
   }
 };
 
-const nuclearTemplate = {
-  'disabled': false,
-  'selectors': null,
-  'task': {
-    'component': 'nuclear',
-    'name': 'TODO',
-    'config': {
-      'target-mysql': {
-        'host': 'TODO',
-        'username': 'TODO',
-        'password': 'TODO',
-        'location': 'Asia/Shanghai',
-        'port': 3306,
-      },
-      'routes': [
-        {
-          'source-schema-name': 'TODO',
-          'source-table-name': 'TODO'
-        }
-      ],
-      'batch-size-per-table': 500,
-      'executor-count-per-table': 200,
-      'input': 'kafka',
-      'output': 'mysql',
-      'kafka-global': {
-        'broker-addrs': [
-          'TODO:9092'
-        ],
-        'consume-from': 'oldest',
-        'group-id': 'TODO',
-        'topics': [
-          'TODO'
-        ]
-      },
-      'use-bidirection': false,
-      'use-shading-proxy': false
-    },
-  }
-};
-
 const scannerTemplate = {
-  'disabled': false,
-  'selectors': null,
   'task': {
     'component': 'scanner',
-    'name': 'TODO',
+    'name': 'default',
     'config': {
-      'output-format': 'pb',
-      'source': {
+      'source-master': {
         'host': 'TODO',
+        'location': 'Asia/Shanghai',
         'username': 'TODO',
         'password': 'TODO',
-        'location': 'Asia/Shanghai',
         'port': 3306,
+      },
+      'source': {
+        'host': 'TODO',
+        'location': 'Asia/Shanghai',
+        'username': 'TODO',
+        'password': 'TODO',
+        'port': 3306,
+      },
+      'nr-scanner': 10,
+      'table-scan-batch': 10000,
+      'batch-per-second-limit': 10,
+      'batch-size-per-table': 10,
+      'target-mysql': {
+        'host': 'TODO',
+        'location': 'Asia/Shanghai',
+        'username': 'TODO',
+        'password': 'TODO',
+        'port': 3306,
+        'max-idle': 500,
+        'max-open': 500,
       },
       'table-config': [
         {
           'schema': 'TODO',
           'table': 'TODO',
-          'scan-column': 'TODO',
-          'scan-type': 'TODO'
         }
       ],
-      'static-route-config': {
-        'routes': [
-          {
-            'dml-target-topic': 'TODO',
-            'source-db': 'TODO',
-            'source-table': 'TODO'
-          }
-        ]
-      },
-      'table-scan-batch': 2000,
-      'batch-per-second-limit': 1,
-      'kafka-global': {
-        'broker-addrs': [
-          'TODO:9092'
-        ],
-        'mode': 'async',
-        'sent-log': {
-          'format': 'json',
-          'file': {
-            'filename': 'config/msg_sent.log',
-            'max-size': 30,
-            'max-days': 15,
-            'compress': true
-          }
+      'db-routes': [
+        {
+          'source-schema-name': 'TODO',
+          'source-table-name': 'TODO',
+          'target-schema-name': 'TODO',
+          'target-table-name': 'TODO'
         }
-      }
+      ],
+      'worker-pool-config': {
+        'nr-worker': 250,
+        'batch-size': 15,
+        'queue-size': 1024,
+        'sliding-window-size': 10240
+      },
     }
   }
 };
@@ -252,32 +265,20 @@ const templates =
       text: 'data',
       title: 'Insert tasks of spec for big data pipeline',
       field: 'tasks',
-      value: [gravityTemplate],
+      value: [gravityDataTemplate],
     },
     {
-      text: 'mysql2mysql',
-      title: 'Insert tasks of spec for mysql2mysql pipeline',
+      text: 'sandbox',
+      title: 'Insert tasks of spec for sandbox pipeline',
       field: 'tasks',
-      value: [scannerTemplate, gravityTemplate, nuclearTemplate],
+      value: [gravitySandboxTemplate],
     },
-    // {
-    //   text: 'gravity task',
-    //   title: 'Insert a gravity task node',
-    //   field: 'task',
-    //   value: gravityTemplate
-    // },
-    // {
-    //   text: 'nuclear task',
-    //   title: 'Insert a nuclear task node',
-    //   field: 'task',
-    //   value: nuclearTemplate
-    // },
-    // {
-    //   text: 'scanner task',
-    //   title: 'Insert a scanner task node',
-    //   field: 'task',
-    //   value: scannerTemplate
-    // },
+    {
+      text: 'mysql-full',
+      title: 'Insert tasks of spec for mysql-full pipeline',
+      field: 'tasks',
+      value: [gravitySandboxTemplate, scannerTemplate],
+    },
   ];
 
 export class JsonEditorOptions {
