@@ -3,14 +3,12 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {PipelinesComponent} from './pipelines/pipelines.component';
 import {PipelineDetailComponent} from './pipeline-detail/pipeline-detail.component';
-import {PipelineCreateComponent} from "./pipeline-create/pipeline-create.component";
-import {ProcessListComponent} from "./process-list/process-list.component";
+import {PipelineCreateComponent} from './pipeline-create/pipeline-create.component';
 
 const routes: Routes = [
   {path: 'pipelines/create', component: PipelineCreateComponent},
-  {path: 'pipelines/:id', component: PipelineDetailComponent},
+  {path: 'pipelines/:name', component: PipelineDetailComponent},
   {path: 'pipelines', component: PipelinesComponent},
-  {path: 'processes', component: ProcessListComponent},
   {path: '', redirectTo: '/pipelines', pathMatch: 'full'},
 ];
 

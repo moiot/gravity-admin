@@ -26,8 +26,8 @@ export class PipelineService {
     );
   }
 
-  get(id: number): Observable<PipelineVO> {
-    return this.http.get(`${url}/${id}`, {responseType: 'text'}).pipe(
+  get(name: string): Observable<PipelineVO> {
+    return this.http.get(`${url}/${name}`, {responseType: 'text'}).pipe(
       map(resp => PipelineVO.createFrom(JSONbig.parse(resp)))
     );
   }
@@ -44,7 +44,7 @@ export class PipelineService {
 
   update(p: PipelineVO): Observable<any> {
     p.status = null;
-    return this.http.put(`${url}/${p.id}`, p, httpOptions).pipe(
+    return this.http.put(`${url}/${p.name}`, p, httpOptions).pipe(
       tap(resp => this.logger.info(resp['msg'])),
       catchError(resp => {
         this.logger.error(`update pipeline failed.`, JSON.stringify(resp['error']));
@@ -53,8 +53,8 @@ export class PipelineService {
     );
   }
 
-  resetFull(id: number): Observable<any> {
-    return this.http.post(`${url}/${id}/resetfull`, httpOptions).pipe(
+  resetFull(name: string): Observable<any> {
+    return this.http.post(`${url}/${name}/resetfull`, httpOptions).pipe(
       tap(resp => this.logger.info(resp['msg'])),
       catchError(resp => {
         this.logger.error(`update pipeline failed.`, JSON.stringify(resp['error']));

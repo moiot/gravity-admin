@@ -89,8 +89,6 @@ export class PipelinesDataSource extends DataSource<PipelineVO> {
       switch (this.sort.active) {
         case 'name':
           return compare(a.name, b.name, isAsc);
-        case 'id':
-          return compare(+a.id, +b.id, isAsc);
         default:
           return 0;
       }
@@ -99,10 +97,6 @@ export class PipelinesDataSource extends DataSource<PipelineVO> {
 
   private getFilteredData(data: PipelineVO[]) {
     const filtered = !this.filter ? data : data.filter(d => {
-      if (d.id.toString() === this.filter) {
-        return true;
-      }
-
       return d.name.toLowerCase().indexOf(this.filter) !== -1;
     });
 
@@ -116,7 +110,7 @@ export class PipelinesDataSource extends DataSource<PipelineVO> {
   }
 }
 
-/** Simple sort comparator for example ID/Name columns (for client-side sorting). */
+/** Simple sort comparator for example Name columns (for client-side sorting). */
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

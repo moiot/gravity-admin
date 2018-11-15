@@ -1,7 +1,3 @@
-import {PipelineConfig as GravityConfig} from './gravity-config';
-import {PipelineConfig as NuclearConfig} from './nuclear-config';
-import {PipelineConfig as ScannerConfig} from './scanner-config';
-
 /* Do not change, this code is generated from Golang structs */
 
 export class TaskStatusVO {
@@ -9,6 +5,7 @@ export class TaskStatusVO {
   'processId': string;
   'state': string;
   'lastUpdate': string;
+  'version': string;
   'task': TaskVO;
 
   static createFrom(source: any) {
@@ -18,6 +15,7 @@ export class TaskStatusVO {
     result['processId'] = source['processId'].toString();
     result['state'] = source['state'];
     result['lastUpdate'] = source['lastUpdate'];
+    result['version'] = source['version'];
     return result;
   }
 
@@ -68,6 +66,8 @@ export class LabelSelector {
 export class TaskVO {
   'component': string;
   'name': string;
+  pipelineName: string;
+  hash: string;
   // 'config': GravityConfig | NuclearConfig | ScannerConfig;
   'config': object;
 
@@ -80,6 +80,8 @@ export class TaskVO {
     result['component'] = source['component'];
     result['name'] = source['name'];
     result['config'] = source['config'];
+    result['pipelineName'] = source['pipelineName'];
+    result['hash'] = source['hash'];
     // switch (result.component) {
     //   case 'gravity': {
     //     if (source.config !== null) {
@@ -112,7 +114,6 @@ export class TaskVO {
 
 export class TaskSpecVO {
   'disabled': boolean;
-  'selectors': LabelSelector[];
   'task': TaskVO;
 
   static createFrom(source: any) {
@@ -153,7 +154,6 @@ export class PipelineSpecVO {
 }
 
 export class PipelineVO {
-  'id': number;
   'name': string;
   'spec': PipelineSpecVO;
   'status': PipelineStatusVO;
@@ -161,7 +161,6 @@ export class PipelineVO {
 
   static createFrom(source: any) {
     const result = new PipelineVO();
-    result['id'] = source['id'];
     result['name'] = source['name'];
     result['version'] = source['version'];
     result['spec'] = source['spec'] ? PipelineSpecVO.createFrom(source['spec']) : null;

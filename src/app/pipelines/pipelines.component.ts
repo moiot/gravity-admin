@@ -15,7 +15,7 @@ export class PipelinesComponent implements OnInit {
   dataSource: PipelinesDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'paused', 'actions'];
+  displayedColumns = ['name', 'paused', 'actions'];
 
   constructor(private pipelineService: PipelineService,
               private logger: LogService) {
@@ -31,8 +31,8 @@ export class PipelinesComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  resumePipe(id: number) {
-    this.pipelineService.get(id).subscribe(pipeline => {
+  resumePipe(name: string) {
+    this.pipelineService.get(name).subscribe(pipeline => {
       if (pipeline.spec.paused) {
         pipeline.spec.paused = false;
         this.pipelineService.update(pipeline).subscribe(() => window.location.reload());
@@ -42,8 +42,8 @@ export class PipelinesComponent implements OnInit {
     });
   }
 
-  pausePipe(id: number) {
-    this.pipelineService.get(id).subscribe(pipeline => {
+  pausePipe(name: string) {
+    this.pipelineService.get(name).subscribe(pipeline => {
       if (!pipeline.spec.paused) {
         pipeline.spec.paused = true;
         this.pipelineService.update(pipeline).subscribe(() => window.location.reload());
@@ -53,10 +53,10 @@ export class PipelinesComponent implements OnInit {
     });
   }
 
-  resetFull(id: number) {
-    this.pipelineService.get(id).subscribe(pipeline => {
+  resetFull(name: string) {
+    this.pipelineService.get(name).subscribe(pipeline => {
       if (pipeline.spec.paused) {
-        this.pipelineService.resetFull(id).subscribe(() => window.location.reload());
+        this.pipelineService.resetFull(name).subscribe(() => window.location.reload());
       } else {
         this.logger.info('pipeline is working, can\'t reset full');
       }

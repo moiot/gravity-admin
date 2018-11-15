@@ -39,8 +39,8 @@ export class PipelineDetailComponent implements OnInit {
   }
 
   getPipeline() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.pipelineService.get(id)
+    const name = this.route.snapshot.paramMap.get('name');
+    this.pipelineService.get(name)
       .subscribe(p => {
         this.pipeline = p;
         this.logger.info(`loaded pipeline ${p.name}`);
