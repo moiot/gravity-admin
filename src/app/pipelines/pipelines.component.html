@@ -24,7 +24,7 @@
         <button mat-flat-button routerLink="/pipelines/{{row.name}}" color="primary">Detail</button>
         <button mat-button (click)="resumePipe(row.name)" [disabled]="!row.spec.paused">Resume</button>
         <button mat-button (click)="pausePipe(row.name)" [disabled]="row.spec.paused">Pause</button>
-        <button mat-button color="warn" (click)="resetFull(row.name)" [disabled]="!row.spec.paused">ResetFull</button>
+        <button mat-button color="warn" (click)="resetFull(row.name)" [disabled]="row.spec.paused">ResetFull</button>
       </mat-cell>
     </ng-container>
 
