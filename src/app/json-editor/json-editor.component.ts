@@ -99,12 +99,9 @@ export class JsonEditorComponent implements OnInit {
 
 export type JsonEditorMode = 'tree' | 'view' | 'form' | 'code' | 'text';
 
-const gravityDataTemplate = {
+const bigDataTemplate = {
   'task': {
-    'component': 'gravity',
-    'name': 'default',
     'config': {
-      'detect-txn': false,
       'input': 'mysql',
       'output': 'kafka',
       'output-format': 'json',
@@ -123,10 +120,6 @@ const gravityDataTemplate = {
           'kafka2.hdp.mobike.cn:9093',
           'kafka6.hdp.mobike.cn:9093'
         ],
-        'cert-file': '',
-        'key-file': '',
-        'ca-file': '',
-        'verify-ssl': false,
         'mode': 'async',
         'sent-log': {
           'level': '',
@@ -142,7 +135,6 @@ const gravityDataTemplate = {
           },
           'SlowQueryFile': ''
         },
-        'producer': null,
         'net': {
           'sasl': {
             'enable': true,
@@ -166,14 +158,11 @@ const gravityDataTemplate = {
   }
 };
 
-const gravitySandboxTemplate = {
+const sandboxTemplate = {
   'task': {
-    'component': 'gravity',
-    'name': 'default',
     'config': {
-      'detect-txn': false,
       'input': 'mysql',
-      'output-format': 'pb',
+      'output': 'mysql',
       'mysql': {
         'source': {
           'host': 'TODO',
@@ -203,58 +192,40 @@ const gravitySandboxTemplate = {
   }
 };
 
-const scannerTemplate = {
+const fullTemplate = {
   'task': {
-    'component': 'scanner',
-    'name': 'default',
     'config': {
-      'source-master': {
-        'host': 'TODO',
-        'location': 'Asia/Shanghai',
-        'username': 'TODO',
-        'password': 'TODO',
-        'port': 3306,
+      'bootstrap': true,
+      'input': 'mysql',
+      'output': 'mysql',
+      'mysql': {
+        'source': {
+          'host': 'TODO',
+          'username': 'TODO',
+          'password': 'TODO',
+          'port': 3306,
+          'location': 'Asia/Shanghai',
+        }
       },
-      'source': {
-        'host': 'TODO',
-        'location': 'Asia/Shanghai',
-        'username': 'TODO',
-        'password': 'TODO',
-        'port': 3306,
-      },
-      'nr-scanner': 10,
-      'table-scan-batch': 10000,
-      'batch-per-second-limit': 10,
-      'batch-size-per-table': 10,
+      'db-routes': [
+        {
+          'source-schema-name': 'TODO',
+          'source-table-name': '*',
+        }
+      ],
       'target-mysql': {
         'host': 'TODO',
-        'location': 'Asia/Shanghai',
         'username': 'TODO',
         'password': 'TODO',
         'port': 3306,
-        'max-idle': 500,
-        'max-open': 500,
+        'location': 'Asia/Shanghai',
       },
       'table-config': [
         {
           'schema': 'TODO',
-          'table': 'TODO',
-        }
+          'table': '*'
+        },
       ],
-      'db-routes': [
-        {
-          'source-schema-name': 'TODO',
-          'source-table-name': 'TODO',
-          'target-schema-name': 'TODO',
-          'target-table-name': 'TODO'
-        }
-      ],
-      'worker-pool-config': {
-        'nr-worker': 250,
-        'batch-size': 15,
-        'queue-size': 1024,
-        'sliding-window-size': 10240
-      },
     }
   }
 };
@@ -265,19 +236,19 @@ const templates =
       text: 'data',
       title: 'Insert tasks of spec for big data pipeline',
       field: 'tasks',
-      value: [gravityDataTemplate],
+      value: [bigDataTemplate],
     },
     {
       text: 'sandbox',
       title: 'Insert tasks of spec for sandbox pipeline',
       field: 'tasks',
-      value: [gravitySandboxTemplate],
+      value: [sandboxTemplate],
     },
     {
       text: 'mysql-full',
       title: 'Insert tasks of spec for mysql-full pipeline',
       field: 'tasks',
-      value: [gravitySandboxTemplate, scannerTemplate],
+      value: [fullTemplate],
     },
   ];
 

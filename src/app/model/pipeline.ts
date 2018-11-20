@@ -114,15 +114,14 @@ export class TaskVO {
 
 export class TaskSpecVO {
   'disabled': boolean;
+  version: string;
   'task': TaskVO;
 
   static createFrom(source: any) {
     const result = new TaskSpecVO();
     result['task'] = source['task'] ? TaskVO.createFrom(source['task']) : null;
-    result['selectors'] = source['selectors'] ? source['selectors'].map(function (element) {
-      return LabelSelector.createFrom(element);
-    }) : null;
     result['disabled'] = source['disabled'];
+    result['version'] = source['version'];
     return result;
   }
 
