@@ -5,7 +5,6 @@ export class TaskStatusVO {
   'processId': string;
   'state': string;
   'lastUpdate': string;
-  'version': string;
   'task': TaskVO;
 
   static createFrom(source: any) {
@@ -15,7 +14,6 @@ export class TaskStatusVO {
     result['processId'] = source['processId'].toString();
     result['state'] = source['state'];
     result['lastUpdate'] = source['lastUpdate'];
-    result['version'] = source['version'];
     return result;
   }
 
@@ -114,14 +112,12 @@ export class TaskVO {
 
 export class TaskSpecVO {
   'disabled': boolean;
-  version: string;
   'task': TaskVO;
 
   static createFrom(source: any) {
     const result = new TaskSpecVO();
     result['task'] = source['task'] ? TaskVO.createFrom(source['task']) : null;
     result['disabled'] = source['disabled'];
-    result['version'] = source['version'];
     return result;
   }
 
