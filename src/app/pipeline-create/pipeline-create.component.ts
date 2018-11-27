@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PipelineService} from '../pipeline.service';
-import {CreatePipelineRequest, PipelineSpecVO} from '../model/pipeline';
+import {PipelineSpecVO, PipelineVO} from '../model/pipeline';
 import {Router} from '@angular/router';
 import {JsonEditorOptions} from '../json-editor/json-editor.component';
 
@@ -11,14 +11,14 @@ import {JsonEditorOptions} from '../json-editor/json-editor.component';
 })
 export class PipelineCreateComponent implements OnInit {
 
-  pipeline: CreatePipelineRequest;
+  pipeline: PipelineVO;
   editorOptions: JsonEditorOptions;
 
   constructor(private pipelineService: PipelineService,
               private router: Router
   ) {
-    this.pipeline = new CreatePipelineRequest();
-    this.pipeline.name = 'TODO';
+    this.pipeline = new PipelineVO();
+    this.pipeline.metadata.name = 'TODO';
     this.pipeline.spec = new PipelineSpecVO();
     this.pipeline.spec.paused = false;
     this.editorOptions = new JsonEditorOptions();
@@ -30,7 +30,7 @@ export class PipelineCreateComponent implements OnInit {
 
   save() {
     this.pipelineService.create(this.pipeline).subscribe(resp => {
-      this.router.navigateByUrl(`/pipeline/${resp['pipelineId']}`);
+      this.router.navigateByUrl(`pipelines/${resp['name']}`);
     });
   }
 }

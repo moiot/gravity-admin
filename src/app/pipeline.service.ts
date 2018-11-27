@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CreatePipelineRequest, PipelineVO} from './model/pipeline';
+import {PipelineVO} from './model/pipeline';
 import {Observable, throwError} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -32,7 +32,7 @@ export class PipelineService {
     );
   }
 
-  create(p: CreatePipelineRequest): Observable<any> {
+  create(p: PipelineVO): Observable<any> {
     return this.http.post(url, p, httpOptions).pipe(
       tap(resp => this.logger.info(resp['msg'])),
       catchError(resp => {
@@ -44,7 +44,7 @@ export class PipelineService {
 
   update(p: PipelineVO): Observable<any> {
     p.status = null;
-    return this.http.put(`${url}/${p.name}`, p, httpOptions).pipe(
+    return this.http.put(`${url}/${p.metadata.name}`, p, httpOptions).pipe(
       tap(resp => this.logger.info(resp['msg'])),
       catchError(resp => {
         this.logger.error(`update pipeline failed.`, JSON.stringify(resp['error']));
@@ -53,11 +53,21 @@ export class PipelineService {
     );
   }
 
-  resetFull(name: string): Observable<any> {
-    return this.http.post(`${url}/${name}/resetfull`, httpOptions).pipe(
+  reset(name: string): Observable<any> {
+    return this.http.post(`${url}/${name}/reset`, httpOptions).pipe(
       tap(resp => this.logger.info(resp['msg'])),
       catchError(resp => {
         this.logger.error(`update pipeline failed.`, JSON.stringify(resp['error']));
+        return throwError(resp['error']);
+      })
+    );
+  }
+
+  delete(name: string): Observable<any> {
+    return this.http.delete(`${url}/${name}`, httpOptions).pipe(
+      tap(resp => this.logger.info(resp['msg'])),
+      catchError(resp => {
+        this.logger.error(`delete pipeline failed.`, JSON.stringify(resp['error']));
         return throwError(resp['error']);
       })
     );

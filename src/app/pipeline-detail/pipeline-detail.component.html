@@ -1,13 +1,13 @@
 <div *ngIf="pipeline">
   <mat-toolbar>
-    <span><a href="http://grafana.mobike.io/d/66666/drc-pipeline-detail?var-pipeline_prefix={{pipeline.name}}&refresh=5s&orgId=2">{{pipeline.name}}</a>@{{pipeline.version}}</span>
+    <span><a href="http://grafana.mobike.io/d/66666/drc-pipeline-detail?var-pipeline_prefix={{pipeline.metadata.name}}&refresh=5s&orgId=2">{{pipeline.metadata.name}}</a>@{{pipeline.metadata.resourceVersion}}</span>
   </mat-toolbar>
   <mat-grid-list cols="2" rowHeight="fit" style="height: 800px">
     <mat-grid-tile>
       <mat-card class="tile-content">
         <mat-card-title>Spec</mat-card-title>
         <mat-card-content>
-          <form (ngSubmit)="onSubmit()" #specForm="ngForm">
+          <form (ngSubmit)="onSubmit()">
             <button mat-raised-button color="primary">Submit</button>
             <app-json-editor [options]="editorOptions" [(data)]="pipeline.spec"></app-json-editor>
           </form>

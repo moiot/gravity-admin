@@ -31,7 +31,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {PipelineDetailComponent} from './pipeline-detail/pipeline-detail.component';
 import {JsonEditorComponent} from './json-editor/json-editor.component';
 import {PipelineCreateComponent} from './pipeline-create/pipeline-create.component';
-import { ProcessListComponent } from './process-list/process-list.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { ProcessListComponent } from './process-list/process-list.component';
     PipelineDetailComponent,
     JsonEditorComponent,
     PipelineCreateComponent,
-    ProcessListComponent
   ],
   imports: [
     BrowserModule,

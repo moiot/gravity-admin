@@ -1,19 +1,21 @@
 /* Do not change, this code is generated from Golang structs */
 
-export class TaskStatusVO {
-  'position': string;
-  'processId': string;
-  'state': string;
-  'lastUpdate': string;
-  'task': TaskVO;
+export class Condition {
+  type: string;
+  status: string;
+  lastUpdateTime: string;
+  lastTransitionTime: string;
+  reason: string;
+  message: string;
 
   static createFrom(source: any) {
-    const result = new TaskStatusVO();
-    result['task'] = source['task'] ? TaskVO.createFrom(source['task']) : null;
-    result['position'] = source['position'];
-    result['processId'] = source['processId'].toString();
-    result['state'] = source['state'];
-    result['lastUpdate'] = source['lastUpdate'];
+    const result = new Condition();
+    result.type = source['type'];
+    result.status = source['status'];
+    result.lastUpdateTime = source['lastUpdateTime'];
+    result.lastTransitionTime = source['lastTransitionTime'];
+    result.reason = source['reason'];
+    result.message = source['message'];
     return result;
   }
 
@@ -24,15 +26,25 @@ export class TaskStatusVO {
 }
 
 export class PipelineStatusVO {
-  'state': string;
-  'tasks': TaskStatusVO[];
+  observedGeneration: string;
+  configHash: string;
+  image: string;
+  command: string[];
+  position: string;
+  podName: string;
+  conditions: Condition[];
 
   static createFrom(source: any) {
     const result = new PipelineStatusVO();
-    result['tasks'] = source['tasks'] ? source['tasks'].map(function (element) {
-      return TaskStatusVO.createFrom(element);
+    result.conditions = source['conditions'] ? source['conditions'].map(function (element) {
+      return Condition.createFrom(element);
     }) : null;
-    result['state'] = source['state'];
+    result.observedGeneration = source['observedGeneration'];
+    result.configHash = source['configHash'];
+    result.image = source['image'];
+    result.command = source['command'];
+    result.position = source['position'];
+    result.podName = source['podName'];
     return result;
   }
 
@@ -42,103 +54,22 @@ export class PipelineStatusVO {
   // [end]
 }
 
-export class LabelSelector {
-  'Key': string;
-  'op': string;
-  'values': string[];
-
-  static createFrom(source: any) {
-    const result = new LabelSelector();
-    result['Key'] = source['Key'];
-    result['op'] = source['op'];
-    result['values'] = source['values'];
-    return result;
-  }
-
-  // [LabelSelector:]
-
-
-  // [end]
-}
-
-export class TaskVO {
-  'component': string;
-  'name': string;
-  pipelineName: string;
-  hash: string;
-  // 'config': GravityConfig | NuclearConfig | ScannerConfig;
-  'config': object;
-
-  get key(): string {
-    return this.name + '-' + this.component;
-  }
-
-  static createFrom(source: any) {
-    const result = new TaskVO();
-    result['component'] = source['component'];
-    result['name'] = source['name'];
-    result['config'] = source['config'];
-    result['pipelineName'] = source['pipelineName'];
-    result['hash'] = source['hash'];
-    // switch (result.component) {
-    //   case 'gravity': {
-    //     if (source.config !== null) {
-    //       result.config = GravityConfig.createFrom(source.config);
-    //     }
-    //     break;
-    //   }
-    //
-    //   case 'nuclear': {
-    //     if (source.config !== null) {
-    //       result.config = NuclearConfig.createFrom(source.config);
-    //     }
-    //     break;
-    //   }
-    //
-    //   case 'scanner': {
-    //     if (source.config !== null) {
-    //       result.config = ScannerConfig.createFrom(source.config);
-    //     }
-    //     break;
-    //   }
-    // }
-    return result;
-  }
-
-  // [TaskVO:]
-
-  // [end]
-}
-
-export class TaskSpecVO {
-  'disabled': boolean;
-  'task': TaskVO;
-
-  static createFrom(source: any) {
-    const result = new TaskSpecVO();
-    result['task'] = source['task'] ? TaskVO.createFrom(source['task']) : null;
-    result['disabled'] = source['disabled'];
-    return result;
-  }
-
-  // [TaskSpecVO:]
-
-
-  // [end]
-}
-
 export class PipelineSpecVO {
-  'lastUpdate': string;
-  'paused': boolean;
-  'tasks': TaskSpecVO[];
+  lastUpdate: string;
+  paused: boolean;
+  config: object;
+  configHash: string;
+  image: string;
+  command: string[];
 
   static createFrom(source: any) {
     const result = new PipelineSpecVO();
-    result['tasks'] = source['tasks'] ? source['tasks'].map(function (element) {
-      return TaskSpecVO.createFrom(element);
-    }) : null;
-    result['paused'] = source['paused'];
-    result['lastUpdate'] = source['lastUpdate'];
+    result.command = source['command'];
+    result.paused = source['paused'];
+    result.lastUpdate = source['lastUpdate'];
+    result.config = source['config'];
+    result.configHash = source['configHash'];
+    result.image = source['image'];
     return result;
   }
 
@@ -148,18 +79,40 @@ export class PipelineSpecVO {
   // [end]
 }
 
+export class MetaData {
+  name: string;
+  resourceVersion: string;
+  generation: string;
+  creationTimestamp: string;
+
+  static createFrom(source: any) {
+    const result = new MetaData();
+    result.name = source['name'];
+    result.resourceVersion = source['resourceVersion'];
+    result.generation = source['generation'];
+    result.creationTimestamp = source['creationTimestamp'];
+    return result;
+  }
+}
+
 export class PipelineVO {
-  'name': string;
-  'spec': PipelineSpecVO;
-  'status': PipelineStatusVO;
-  'version': number;
+  kind: string;
+  metadata: MetaData;
+  apiVersion: string;
+  spec: PipelineSpecVO;
+  status: PipelineStatusVO;
+
+  constructor() {
+    this.metadata = new MetaData();
+  }
 
   static createFrom(source: any) {
     const result = new PipelineVO();
-    result['name'] = source['name'];
-    result['version'] = source['version'];
-    result['spec'] = source['spec'] ? PipelineSpecVO.createFrom(source['spec']) : null;
-    result['status'] = source['status'] ? PipelineStatusVO.createFrom(source['status']) : null;
+    result.metadata = source['metadata'] ? MetaData.createFrom(source['metadata']) : null;
+    result.kind = source['kind'];
+    result.apiVersion = source['apiVersion'];
+    result.spec = source['spec'] ? PipelineSpecVO.createFrom(source['spec']) : null;
+    result.status = source['status'] ? PipelineStatusVO.createFrom(source['status']) : null;
     return result;
   }
 
@@ -168,12 +121,3 @@ export class PipelineVO {
 
   // [end]
 }
-
-export class CreatePipelineRequest {
-  'name': string;
-  'spec': PipelineSpecVO;
-}
-
-export const Gravity = 'gravity';
-export const Nuclear = 'nuclear';
-export const Scanner = 'scanner';

@@ -100,133 +100,127 @@ export class JsonEditorComponent implements OnInit {
 export type JsonEditorMode = 'tree' | 'view' | 'form' | 'code' | 'text';
 
 const bigDataTemplate = {
-  'task': {
-    'config': {
-      'input': 'mysql',
-      'output': 'kafka',
-      'output-format': 'json',
-      'mysql': {
-        'source': {
-          'host': 'TODO',
-          'username': 'TODO',
-          'password': 'TODO',
-          'location': 'Asia/Shanghai',
-          'port': 3306,
-        }
-      },
-      'kafka-global': {
-        'broker-addrs': [
-          'kafka1.hdp.mobike.cn:9093',
-          'kafka2.hdp.mobike.cn:9093',
-          'kafka6.hdp.mobike.cn:9093'
-        ],
-        'mode': 'async',
-        'sent-log': {
-          'level': '',
-          'format': 'json',
-          'disable-timestamp': false,
-          'file': {
-            'filename': 'config/msg_sent.log',
-            'log-rotate': false,
-            'max-size': 30,
-            'max-days': 15,
-            'max-backups': 0,
-            'compress': true
-          },
-          'SlowQueryFile': ''
-        },
-        'net': {
-          'sasl': {
-            'enable': true,
-            'user': 'db_drc',
-            'password': 'aLTfSK$4l3'
-          },
-          'KeepAlive': 0
-        }
-      },
-      'route-mode': 'static',
-      'static-route-config': {
-        'routes': [
-          {
-            'source-db': 'TODO',
-            'source-table': 'TODO',
-            'dml-target-topic': 'binlog.TODO.TODO'
-          }
-        ]
+  'config': {
+    'input': 'mysql',
+    'output': 'kafka',
+    'output-format': 'json',
+    'mysql': {
+      'source': {
+        'host': 'TODO',
+        'username': 'TODO',
+        'password': 'TODO',
+        'location': 'Asia/Shanghai',
+        'port': 3306,
       }
+    },
+    'kafka-global': {
+      'broker-addrs': [
+        'kafka1.hdp.mobike.cn:9093',
+        'kafka2.hdp.mobike.cn:9093',
+        'kafka6.hdp.mobike.cn:9093'
+      ],
+      'mode': 'async',
+      'sent-log': {
+        'level': '',
+        'format': 'json',
+        'disable-timestamp': false,
+        'file': {
+          'filename': 'config/msg_sent.log',
+          'log-rotate': false,
+          'max-size': 30,
+          'max-days': 15,
+          'max-backups': 0,
+          'compress': true
+        },
+        'SlowQueryFile': ''
+      },
+      'net': {
+        'sasl': {
+          'enable': true,
+          'user': 'db_drc',
+          'password': 'aLTfSK$4l3'
+        },
+        'KeepAlive': 0
+      }
+    },
+    'route-mode': 'static',
+    'static-route-config': {
+      'routes': [
+        {
+          'source-db': 'TODO',
+          'source-table': 'TODO',
+          'dml-target-topic': 'binlog.TODO.TODO'
+        }
+      ]
     }
   }
 };
 
 const sandboxTemplate = {
-  'task': {
-    'config': {
-      'input': 'mysql',
-      'output': 'mysql',
-      'mysql': {
-        'source': {
-          'host': 'TODO',
-          'username': 'TODO',
-          'password': 'TODO',
-          'port': 3306,
-          'location': 'Asia/Shanghai',
-        }
-      },
-      'db-routes': [
-        {
-          'source-schema-name': 'TODO',
-          'source-table-name': '*',
-        }
-      ],
-      'target-mysql': {
+  'config': {
+    'input': 'mysql',
+    'output': 'mysql',
+    'mysql': {
+      'source': {
         'host': 'TODO',
         'username': 'TODO',
         'password': 'TODO',
         'port': 3306,
         'location': 'Asia/Shanghai',
-      },
-      'target-mysql-worker': {
-        'enable-ddl': true,
-      },
-    }
+      }
+    },
+    'db-routes': [
+      {
+        'source-schema-name': 'TODO',
+        'source-table-name': '*',
+      }
+    ],
+    'target-mysql': {
+      'host': 'TODO',
+      'username': 'TODO',
+      'password': 'TODO',
+      'port': 3306,
+      'location': 'Asia/Shanghai',
+    },
+    'target-mysql-worker': {
+      'enable-ddl': true,
+    },
   }
 };
 
 const fullTemplate = {
-  'task': {
-    'config': {
-      'bootstrap': true,
-      'input': 'mysql',
-      'output': 'mysql',
-      'mysql': {
-        'source': {
-          'host': 'TODO',
-          'username': 'TODO',
-          'password': 'TODO',
-          'port': 3306,
-          'location': 'Asia/Shanghai',
-        }
-      },
-      'db-routes': [
-        {
-          'source-schema-name': 'TODO',
-          'source-table-name': '*',
-        }
-      ],
-      'target-mysql': {
+  'config': {
+    'bootstrap': true,
+    'input': 'mysql',
+    'output': 'mysql',
+    'mysql': {
+      'source': {
         'host': 'TODO',
         'username': 'TODO',
         'password': 'TODO',
         'port': 3306,
         'location': 'Asia/Shanghai',
+      }
+    },
+    'db-routes': [
+      {
+        'source-schema-name': 'TODO',
+        'source-table-name': '*',
+      }
+    ],
+    'target-mysql': {
+      'host': 'TODO',
+      'username': 'TODO',
+      'password': 'TODO',
+      'port': 3306,
+      'location': 'Asia/Shanghai',
+    },
+    'table-config': [
+      {
+        'schema': 'TODO',
+        'table': '*'
       },
-      'table-config': [
-        {
-          'schema': 'TODO',
-          'table': '*'
-        },
-      ],
-    }
+    ],
   }
 };
 

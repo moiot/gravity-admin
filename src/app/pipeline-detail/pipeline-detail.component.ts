@@ -43,7 +43,7 @@ export class PipelineDetailComponent implements OnInit {
     this.pipelineService.get(name)
       .subscribe(p => {
         this.pipeline = p;
-        this.logger.info(`loaded pipeline ${p.name}`);
+        this.logger.info(`loaded pipeline ${p.metadata.name}`);
       });
   }
 

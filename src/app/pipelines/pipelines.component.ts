@@ -53,13 +53,17 @@ export class PipelinesComponent implements OnInit {
     });
   }
 
-  resetFull(name: string) {
+  reset(name: string) {
     this.pipelineService.get(name).subscribe(pipeline => {
       if (pipeline.spec.paused) {
-        this.pipelineService.resetFull(name).subscribe(() => window.location.reload());
+        this.pipelineService.reset(name).subscribe(() => window.location.reload());
       } else {
         this.logger.info('pipeline is working, can\'t reset full');
       }
     });
+  }
+
+  delete(name: string) {
+    this.pipelineService.delete(name).subscribe(() => window.location.reload());
   }
 }

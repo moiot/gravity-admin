@@ -88,7 +88,7 @@ export class PipelinesDataSource extends DataSource<PipelineVO> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         case 'name':
-          return compare(a.name, b.name, isAsc);
+          return compare(a.metadata.name, b.metadata.name, isAsc);
         default:
           return 0;
       }
@@ -97,7 +97,7 @@ export class PipelinesDataSource extends DataSource<PipelineVO> {
 
   private getFilteredData(data: PipelineVO[]) {
     const filtered = !this.filter ? data : data.filter(d => {
-      return d.name.toLowerCase().indexOf(this.filter) !== -1;
+      return d.metadata.name.toLowerCase().indexOf(this.filter) !== -1;
     });
 
     this.paginator.length = filtered.length;
