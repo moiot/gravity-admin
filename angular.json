@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "drc-admin": {
+    "gravity-admin": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/drc-admin",
+            "outputPath": "dist/gravity-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,19 +53,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "drc-admin:build",
+            "browserTarget": "gravity-admin:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "drc-admin:build:production"
+              "browserTarget": "gravity-admin:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "drc-admin:build"
+            "browserTarget": "gravity-admin:build"
           }
         },
         "test": {
@@ -102,7 +102,7 @@
         }
       }
     },
-    "drc-admin-e2e": {
+    "gravity-admin-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -110,11 +110,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "drc-admin:serve"
+            "devServerTarget": "gravity-admin:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "drc-admin:serve:production"
+              "devServerTarget": "gravity-admin:serve:production"
             }
           }
         },
@@ -130,5 +130,5 @@
       }
     }
   },
-  "defaultProject": "drc-admin"
+  "defaultProject": "gravity-admin"
 }
