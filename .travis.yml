@@ -1,0 +1,16 @@
+language: node_js
+
+jobs:
+  include:
+    - name: "build"
+      if: tag IS NOT present
+      script:
+        - npm run build -- --prod
+        - docker build -t moiot/gravity-admin:${TRAVIS_COMMIT::8} .
+    - name: "publish"
+      if: tag IS present
+      script:
+        - npm run build -- --prod
+        - docker build -t moiot/gravity-admin:${TRAVIS_TAG} .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push moiot/gravity-admin:${TRAVIS_TAG}
