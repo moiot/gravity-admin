@@ -99,150 +99,149 @@ export class JsonEditorComponent implements OnInit {
 
 export type JsonEditorMode = 'tree' | 'view' | 'form' | 'code' | 'text';
 
-const bigDataTemplate = {
+const kafkaTemplate = {
   'config': {
-    'input': 'mysql',
-    'output': 'kafka',
-    'output-format': 'json',
-    'mysql': {
-      'source': {
-        'host': 'TODO',
-        'username': 'TODO',
-        'password': 'TODO',
-        'location': 'Asia/Shanghai',
-        'port': 3306,
-      }
-    },
-    'kafka-global': {
-      'broker-addrs': [
-        'kafka1.hdp.mobike.cn:9093',
-        'kafka2.hdp.mobike.cn:9093',
-        'kafka6.hdp.mobike.cn:9093'
-      ],
-      'mode': 'async',
-      'sent-log': {
-        'level': '',
-        'format': 'json',
-        'disable-timestamp': false,
-        'file': {
-          'filename': 'config/msg_sent.log',
-          'log-rotate': false,
-          'max-size': 30,
-          'max-days': 15,
-          'max-backups': 0,
-          'compress': true
-        },
-        'SlowQueryFile': ''
-      },
-      'net': {
-        'sasl': {
-          'enable': true,
-          'user': 'db_drc',
-          'password': 'aLTfSK$4l3'
-        },
-        'KeepAlive': 0
-      }
-    },
-    'route-mode': 'static',
-    'static-route-config': {
-      'routes': [
-        {
-          'source-db': 'TODO',
-          'source-table': 'TODO',
-          'dml-target-topic': 'binlog.TODO.TODO'
+    "input": {
+      "mysql": {
+        "mode": "stream",
+        "source": {
+          "host": "TODO",
+          "port": 3306,
+          "username": "TODO",
+          "password": "TODO",
         }
-      ]
+      }
+    },
+    "output": {
+      "async-kafka": {
+        "kafka-global-config": {
+          "broker-addrs": ["TODO"],
+          "mode": "async",
+        },
+        "routes": [
+          {
+            "match-schema": "TODO",
+            "match-table": "*",
+            "dml-topic": "TODO",
+          }
+        ],
+      }
     }
   }
 };
 
-const sandboxTemplate = {
+const streamTemplate = {
   'config': {
-    'input': 'mysql',
-    'output': 'mysql',
-    'mysql': {
-      'source': {
-        'host': 'TODO',
-        'username': 'TODO',
-        'password': 'TODO',
-        'port': 3306,
-        'location': 'Asia/Shanghai',
+    "input": {
+      "mysql": {
+        "mode": "stream",
+        "source": {
+          "host": "TODO",
+          "port": 3306,
+          "username": "TODO",
+          "password": "TODO",
+        }
       }
     },
-    'db-routes': [
-      {
-        'source-schema-name': 'TODO',
-        'source-table-name': '*',
+    "output": {
+      "mysql": {
+        "routes": [
+          {
+            "match-schema": "TODO",
+            "match-table": "*",
+            "target-schema": "",
+            "target-table": "",
+          }
+        ],
+        "target": {
+          "host": "TODO",
+          "port": 3306,
+          "username": "TODO",
+          "password": "TODO",
+        }
       }
-    ],
-    'target-mysql': {
-      'host': 'TODO',
-      'username': 'TODO',
-      'password': 'TODO',
-      'port': 3306,
-      'location': 'Asia/Shanghai',
     },
-    'target-mysql-worker': {
-      'enable-ddl': true,
-    },
+    "scheduler": {
+      "batch-table-scheduler": {
+        "batch-size": 1,
+        "nr-worker": 10,
+        "queue-size": 1024,
+        "sliding-window-size": 10240
+      }
+    }
   }
 };
 
-const fullTemplate = {
+const replicationTemplate = {
   'config': {
-    'bootstrap': true,
-    'input': 'mysql',
-    'output': 'mysql',
-    'mysql': {
-      'source': {
-        'host': 'TODO',
-        'username': 'TODO',
-        'password': 'TODO',
-        'port': 3306,
-        'location': 'Asia/Shanghai',
+    "input": {
+      "mysql": {
+        "mode": "replication",
+        "batch-per-second-limit": 10,
+        "nr-scanner": 10,
+        "table-scan-batch": 1000,
+        "source": {
+          "host": "TODO",
+          "port": 3306,
+          "username": "TODO",
+          "password": "TODO",
+        },
+        "table-configs": [
+          {
+            "schema": "TODO",
+            "table": "*",
+          },
+        ],
       }
     },
-    'db-routes': [
-      {
-        'source-schema-name': 'TODO',
-        'source-table-name': '*',
+    "output": {
+      "mysql": {
+        "routes": [
+          {
+            "match-schema": "TODO",
+            "match-table": "*",
+            "target-schema": "",
+            "target-table": "",
+          }
+        ],
+        "target": {
+          "host": "TODO",
+          "port": 3306,
+          "username": "TODO",
+          "password": "TODO",
+        }
       }
-    ],
-    'target-mysql': {
-      'host': 'TODO',
-      'username': 'TODO',
-      'password': 'TODO',
-      'port': 3306,
-      'location': 'Asia/Shanghai',
     },
-    'table-config': [
-      {
-        'schema': 'TODO',
-        'table': '*'
-      },
-    ],
+    "scheduler": {
+      "batch-table-scheduler": {
+        "batch-size": 1,
+        "nr-worker": 10,
+        "queue-size": 1024,
+        "sliding-window-size": 10240
+      }
+    }
   }
 };
 
 const templates =
   [
     {
-      text: 'data',
-      title: 'Insert tasks of spec for big data pipeline',
+      text: 'mysql2kafka',
+      title: 'Insert tasks of spec for mysql2kafka pipeline',
       field: 'tasks',
-      value: [bigDataTemplate],
+      value: [kafkaTemplate],
     },
     {
-      text: 'sandbox',
-      title: 'Insert tasks of spec for sandbox pipeline',
+      text: 'mysql stream',
+      title: 'Insert tasks of spec for mysql stream pipeline',
       field: 'tasks',
-      value: [sandboxTemplate],
+      value: [streamTemplate],
     },
     {
-      text: 'mysql-full',
-      title: 'Insert tasks of spec for mysql-full pipeline',
+      text: 'mysql replication',
+      title: 'Insert tasks of spec for mysql replication pipeline',
       field: 'tasks',
-      value: [fullTemplate],
+      value: [replicationTemplate],
     },
   ];
 
