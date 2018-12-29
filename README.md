@@ -1,4 +1,4 @@
-# DRC Admin
+# Gravity Admin
 
 ## Build from source
 ```bash
