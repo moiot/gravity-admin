@@ -228,20 +228,20 @@ const templates =
     {
       text: 'mysql2kafka',
       title: 'Insert tasks of spec for mysql2kafka pipeline',
-      field: 'tasks',
-      value: [kafkaTemplate],
+      field: 'spec',
+      value: kafkaTemplate,
     },
     {
       text: 'mysql stream',
       title: 'Insert tasks of spec for mysql stream pipeline',
-      field: 'tasks',
-      value: [streamTemplate],
+      field: 'spec',
+      value: streamTemplate,
     },
     {
       text: 'mysql replication',
       title: 'Insert tasks of spec for mysql replication pipeline',
-      field: 'tasks',
-      value: [replicationTemplate],
+      field: 'spec',
+      value: replicationTemplate,
     },
   ];
 

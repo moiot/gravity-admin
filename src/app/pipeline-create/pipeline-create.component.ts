@@ -19,8 +19,6 @@ export class PipelineCreateComponent implements OnInit {
   ) {
     this.pipeline = new PipelineVO();
     this.pipeline.metadata.name = 'TODO';
-    this.pipeline.spec = new PipelineSpecVO();
-    this.pipeline.spec.paused = false;
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.modes = ['code', 'tree'];
   }
