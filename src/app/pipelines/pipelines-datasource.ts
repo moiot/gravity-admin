@@ -21,6 +21,8 @@ export class PipelinesDataSource extends DataSource<PipelineVO> {
     pipelineService.list().subscribe(pipes => {
       self.data = pipes;
     });
+    this.sort.direction = 'asc';
+    this.sort.active = 'name';
   }
 
   get filter(): string {
