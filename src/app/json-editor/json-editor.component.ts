@@ -101,28 +101,31 @@ export type JsonEditorMode = 'tree' | 'view' | 'form' | 'code' | 'text';
 
 const kafkaTemplate = {
   'config': {
-    "input": {
-      "mysql": {
-        "mode": "stream",
-        "source": {
-          "host": "TODO",
-          "port": 3306,
-          "username": "TODO",
-          "password": "TODO",
+    'version': '1.0',
+    'input': {
+      'type': 'mysql',
+      'mode': 'stream',
+      'config': {
+        'source': {
+          'host': 'TODO',
+          'port': 3306,
+          'username': 'TODO',
+          'password': 'TODO',
         }
       }
     },
-    "output": {
-      "async-kafka": {
-        "kafka-global-config": {
-          "broker-addrs": ["TODO"],
-          "mode": "async",
+    'output': {
+      'type': 'async-kafka',
+      'config': {
+        'kafka-global-config': {
+          'broker-addrs': ['TODO'],
+          'mode': 'async',
         },
-        "routes": [
+        'routes': [
           {
-            "match-schema": "TODO",
-            "match-table": "*",
-            "dml-topic": "TODO",
+            'match-schema': 'TODO',
+            'match-table': '*',
+            'dml-topic': 'TODO',
           }
         ],
       }
@@ -132,41 +135,46 @@ const kafkaTemplate = {
 
 const streamTemplate = {
   'config': {
-    "input": {
-      "mysql": {
-        "mode": "stream",
-        "source": {
-          "host": "TODO",
-          "port": 3306,
-          "username": "TODO",
-          "password": "TODO",
+    'version': '1.0',
+    'input': {
+      'type': 'mysql',
+      'mode': 'stream',
+      'config': {
+        'source': {
+          'host': 'TODO',
+          'port': 3306,
+          'username': 'TODO',
+          'password': 'TODO',
         }
       }
     },
-    "output": {
-      "mysql": {
-        "routes": [
+    'output': {
+      'type': 'mysql',
+      'config': {
+        'enable-ddl': true,
+        'routes': [
           {
-            "match-schema": "TODO",
-            "match-table": "*",
-            "target-schema": "",
-            "target-table": "",
+            'match-schema': 'TODO',
+            'match-table': '*',
+            'target-schema': '',
+            'target-table': '',
           }
         ],
-        "target": {
-          "host": "TODO",
-          "port": 3306,
-          "username": "TODO",
-          "password": "TODO",
+        'target': {
+          'host': 'TODO',
+          'port': 3306,
+          'username': 'TODO',
+          'password': 'TODO',
         }
       }
     },
-    "scheduler": {
-      "batch-table-scheduler": {
-        "batch-size": 1,
-        "nr-worker": 10,
-        "queue-size": 1024,
-        "sliding-window-size": 10240
+    'scheduler': {
+      'type': 'batch-table-scheduler',
+      'config': {
+        'batch-size': 1,
+        'nr-worker': 10,
+        'queue-size': 1024,
+        'sliding-window-size': 10240
       }
     }
   }
@@ -174,50 +182,55 @@ const streamTemplate = {
 
 const replicationTemplate = {
   'config': {
-    "input": {
-      "mysql": {
-        "mode": "replication",
-        "batch-per-second-limit": 10,
-        "nr-scanner": 10,
-        "table-scan-batch": 1000,
-        "source": {
-          "host": "TODO",
-          "port": 3306,
-          "username": "TODO",
-          "password": "TODO",
+    'version': '1.0',
+    'input': {
+      'type': 'mysql',
+      'mode': 'replication',
+      'config': {
+        'batch-per-second-limit': 10,
+        'nr-scanner': 10,
+        'table-scan-batch': 1000,
+        'source': {
+          'host': 'TODO',
+          'port': 3306,
+          'username': 'TODO',
+          'password': 'TODO',
         },
-        "table-configs": [
+        'table-configs': [
           {
-            "schema": "TODO",
-            "table": "*",
+            'schema': 'TODO',
+            'table': '*',
           },
         ],
       }
     },
-    "output": {
-      "mysql": {
-        "routes": [
+    'output': {
+      'type': 'mysql',
+      'config': {
+        'enable-ddl': true,
+        'routes': [
           {
-            "match-schema": "TODO",
-            "match-table": "*",
-            "target-schema": "",
-            "target-table": "",
+            'match-schema': 'TODO',
+            'match-table': '*',
+            'target-schema': '',
+            'target-table': '',
           }
         ],
-        "target": {
-          "host": "TODO",
-          "port": 3306,
-          "username": "TODO",
-          "password": "TODO",
+        'target': {
+          'host': 'TODO',
+          'port': 3306,
+          'username': 'TODO',
+          'password': 'TODO',
         }
       }
     },
-    "scheduler": {
-      "batch-table-scheduler": {
-        "batch-size": 1,
-        "nr-worker": 10,
-        "queue-size": 1024,
-        "sliding-window-size": 10240
+    'scheduler': {
+      'type': 'batch-table-scheduler',
+      'config': {
+        'batch-size': 1,
+        'nr-worker': 10,
+        'queue-size': 1024,
+        'sliding-window-size': 10240
       }
     }
   }
