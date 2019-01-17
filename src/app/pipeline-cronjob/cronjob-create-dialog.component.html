@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Create cronjob for {{cronJob.pipeline}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="cronJob.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="cron" [(ngModel)]="cronJob.cron">
+  </mat-form-field>
+
+  <mat-radio-group [(ngModel)]="cronJob.action">
+    <mat-radio-button value="pause">Pause</mat-radio-button>
+    <mat-radio-button value="resume">Resume</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Cancel</button>
+  <button mat-button [mat-dialog-close]="cronJob" cdkFocusInitial>Submit</button>
+</div>

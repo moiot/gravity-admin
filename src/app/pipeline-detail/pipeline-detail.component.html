@@ -2,7 +2,7 @@
   <mat-toolbar>
     <span>{{pipeline.metadata.name}}@{{pipeline.metadata.generation}}</span>
   </mat-toolbar>
-  <mat-grid-list cols="2" rowHeight="fit" style="height: 800px">
+  <mat-grid-list cols="2" rowHeight="8:7">
     <mat-grid-tile>
       <mat-card class="tile-content">
         <mat-card-title>Spec</mat-card-title>
@@ -13,11 +13,9 @@
           </form>
         </mat-card-content>
       </mat-card>
-
     </mat-grid-tile>
 
     <mat-grid-tile>
-
       <mat-card class="tile-content">
         <mat-card-title>Status</mat-card-title>
         <mat-card-content>
@@ -27,5 +25,13 @@
       </mat-card>
     </mat-grid-tile>
 
+    <mat-grid-tile [colspan]=2>
+      <mat-card class="tile-content">
+        <mat-card-title>CronJob</mat-card-title>
+        <mat-card-content>
+          <app-pipeline-cronjob [pipeline]="pipeline.metadata.name"></app-pipeline-cronjob>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
   </mat-grid-list>
 </div>

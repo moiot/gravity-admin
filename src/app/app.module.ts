@@ -24,13 +24,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 import {AppRoutingModule} from './app-routing.module';
 import {PipelineDetailComponent} from './pipeline-detail/pipeline-detail.component';
 import {JsonEditorComponent} from './json-editor/json-editor.component';
 import {PipelineCreateComponent} from './pipeline-create/pipeline-create.component';
+import {PipelineCronjobComponent} from './pipeline-cronjob/pipeline-cronjob.component';
+import {CronjobCreateDialogComponent} from './pipeline-cronjob/cronjob-create-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import {PipelineCreateComponent} from './pipeline-create/pipeline-create.compone
     PipelineDetailComponent,
     JsonEditorComponent,
     PipelineCreateComponent,
+    PipelineCronjobComponent,
+    CronjobCreateDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,10 +64,12 @@ import {PipelineCreateComponent} from './pipeline-create/pipeline-create.compone
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
+    MatDialogModule,
 
     HttpClientModule,
     AppRoutingModule,
   ],
+  entryComponents: [CronjobCreateDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

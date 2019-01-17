@@ -1,0 +1,31 @@
+
+<button mat-raised-button color="primary" (click)="openDialog()">Create</button>
+
+<table mat-table [dataSource]="data" class="mat-elevation-z8" style="width: 100%;margin-top: 10px">
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.action}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="cron">
+    <mat-header-cell *matHeaderCellDef>Cron</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.cron}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button color="warn" (click)="delete(row)">Delete</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</table>
